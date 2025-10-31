@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'apps',
-    'apps.auth',
+    'apps.authentication',
     'apps.products',
     'apps.inventory',
     'apps.sales',
