@@ -1,6 +1,6 @@
 import uuid
 from django.db import models
-from apps.auth.models import Store
+from apps.authentication.models import Store
 
 
 class DailySalesReport(models.Model):

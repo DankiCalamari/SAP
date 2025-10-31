@@ -1,7 +1,7 @@
 import uuid
 from django.db import models
 from django.db.models import F
-from apps.auth.models import Store, User
+from apps.authentication.models import Store, User
 from apps.products.models import Product
 
 
