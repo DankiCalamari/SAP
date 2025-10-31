@@ -3,7 +3,7 @@ import datetime
 from django.conf import settings
 from rest_framework.authentication import BaseAuthentication
 from rest_framework.exceptions import AuthenticationFailed
-from apps.auth.models import User
+from apps.authentication.models import User
 
 
 class JWTAuthentication(BaseAuthentication):

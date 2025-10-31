@@ -1,5 +1,5 @@
 from django.urls import path
-from apps.auth.views import (
+from apps.authentication.views import (
     LoginView, LogoutView, RefreshTokenView, RegisterView
 )
 

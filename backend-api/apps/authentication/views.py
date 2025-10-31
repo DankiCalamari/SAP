@@ -2,11 +2,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from apps.auth.serializers import (
+from apps.authentication.serializers import (
     LoginSerializer, RegisterSerializer, RefreshTokenSerializer, UserSerializer
 )
-from apps.auth.authentication import generate_tokens
-from apps.auth.models import User
+from apps.authentication.authentication import generate_tokens
+from apps.authentication.models import User
 
 
 class LoginView(APIView):
