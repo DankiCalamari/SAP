@@ -31,7 +31,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
         """Search customer by phone or email"""
         phone = request.query_params.get('phone')
         email = request.query_params.get('email')
-        store_id = request.user.store_id
+        store_id = self.request.user.store_id
 
         if not phone and not email:
             return Response(
@@ -95,7 +95,7 @@ class DiscountViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         """Override create to check permissions"""
-        if request.user.role not in ('manager', 'admin'):
+        if self.request.user.role not in ('manager', 'admin'):
             return Response(
                 {'error': 'Only managers can create discounts'},
                 status=status.HTTP_403_FORBIDDEN
@@ -104,7 +104,7 @@ class DiscountViewSet(viewsets.ModelViewSet):
 
     def update(self, request, *args, **kwargs):
         """Override update to check permissions"""
-        if request.user.role not in ('manager', 'admin'):
+        if self.request.user.role not in ('manager', 'admin'):
             return Response(
                 {'error': 'Only managers can update discounts'},
                 status=status.HTTP_403_FORBIDDEN
@@ -113,7 +113,7 @@ class DiscountViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         """Override destroy to soft-delete discounts"""
-        if request.user.role not in ('manager', 'admin'):
+        if self.request.user.role not in ('manager', 'admin'):
             return Response(
                 {'error': 'Only managers can delete discounts'},
                 status=status.HTTP_403_FORBIDDEN
@@ -129,7 +129,7 @@ class DiscountViewSet(viewsets.ModelViewSet):
     def available(self, request):
         """Get currently available discounts"""
         today = date.today()
-        store_id = request.user.store_id
+        store_id = self.request.user.store_id
 
         discounts = Discount.objects.filter(
             store_id=store_id,
@@ -209,7 +209,7 @@ class LayawayViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         """Filter layaways by user's store"""
-        store_id = request.user.store_id
-        if request.user.role == 'admin':
+        store_id = self.request.user.store_id
+        if self.request.user.role == 'admin':
             return Layaway.objects.all()
         return Layaway.objects.filter(store_id=store_id)
