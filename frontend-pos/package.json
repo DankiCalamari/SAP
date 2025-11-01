@@ -1,0 +1,23 @@
+{
+  "name": "sap-pos-terminal",
+  "version": "1.0.0",
+  "description": "POS Terminal for SAP Platform",
+  "main": "main.js",
+  "homepage": "./",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "react-scripts build && electron-builder"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "axios": "^1.6.0",
+    "zustand": "^4.4.0",
+    "date-fns": "^2.30.0"
+  },
+  "devDependencies": {
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.0"
+  }
+}
