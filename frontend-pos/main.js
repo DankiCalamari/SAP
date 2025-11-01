@@ -23,7 +23,7 @@ function createWindow() {
 
   mainWindow.loadURL(startURL);
 
-  if (isDev) {
+  if (!app.isPackaged) {
     mainWindow.webContents.openDevTools();
   }
 
