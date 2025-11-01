@@ -6,8 +6,11 @@
   "homepage": "./",
   "scripts": {
     "start": "electron .",
-    "dev": "electron . --dev",
-    "build": "react-scripts build && electron-builder"
+    "dev": "concurrently \"npm run vite-dev\" \"npm run electron-dev\"",
+    "vite-dev": "vite",
+    "electron-dev": "cross-env NODE_ENV=development electron .",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "axios": "^1.6.0",
