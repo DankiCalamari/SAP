@@ -17,7 +17,7 @@ function createWindow() {
     },
   });
 
-  const startURL = isDev
+  const startURL = !app.isPackaged
     ? 'http://localhost:3000'
     : `file://${path.join(__dirname, '../build/index.html')}`;
 
