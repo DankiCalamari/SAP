@@ -21,7 +21,31 @@ function createWindow() {
     ? 'http://localhost:3000'
     : `file://${path.join(__dirname, '../build/index.html')}`;
 
-  mainWindow.loadURL(startURL);
+  // In development, retry loading until dev server is ready
+  if (!app.isPackaged) {
+    const loadWithRetry = async () => {
+      const maxRetries = 10;
+      const retryDelay = 500;
+
+      for (let i = 0; i < maxRetries; i++) {
+        try {
+          await mainWindow.loadURL(startURL);
+          return;
+        } catch (err) {
+          if (i < maxRetries - 1) {
+            await new Promise(resolve => setTimeout(resolve, retryDelay));
+          } else {
+            console.error('Failed to connect to dev server after retries:', err);
+            throw err;
+          }
+        }
+      }
+    };
+
+    loadWithRetry();
+  } else {
+    mainWindow.loadURL(startURL);
+  }
 
   if (!app.isPackaged) {
     mainWindow.webContents.openDevTools();
